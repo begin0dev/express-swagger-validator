@@ -1,5 +1,6 @@
 import { Request } from 'express';
 import Ajv, { DefinedError } from 'ajv';
+import addFormats from 'ajv-formats';
 
 import { DocSchema, RoutesKey } from './types';
 import { requestKeyMap } from './helper';
@@ -14,9 +15,11 @@ export class ValidationError extends Error {
   }
 }
 
+const ajv = new Ajv({ useDefaults: true, strict: false });
+addFormats(ajv);
+
 export const requestValidator = (req: Request, docSchema: DocSchema<any>) => {
   const { additionalProperties } = docSchema;
-  const ajv = new Ajv({ useDefaults: true });
 
   Object.keys(requestKeyMap).forEach((key: RoutesKey) => {
     if (!docSchema[key]) return;
