@@ -1,0 +1,31 @@
+{
+  "extends": ["airbnb-base", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["import", "@typescript-eslint", "jest"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".ts", ".js", ".json"]
+      }
+    }
+  },
+  "env": {
+    "jest/globals": true
+  },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "args": "none",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "object-property-newline": "off",
+    "object-curly-newline": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
+    "import/extensions": ["error", "ignorePackages", { "js": "never", "ts": "never" }],
+    "lines-between-class-members": "off",
+    "func-names": "off"
+  }
+}
