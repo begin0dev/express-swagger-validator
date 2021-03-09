@@ -47,7 +47,8 @@ class SwaggerGenerator {
           ) =>
             acc.concat(
               Object.entries(requestKeySchema.properties).map(
-                ([name, { description: schemaDesc, ...schema }]: [string, any]): OpenApi.ParameterObject => ({
+                // TODO: any 고치고 싶다
+                ([name, { description: schemaDesc, kind, ...schema }]: [string, any]): OpenApi.ParameterObject => ({
                   name,
                   schema,
                   in: requestKeyMap[requestKey],

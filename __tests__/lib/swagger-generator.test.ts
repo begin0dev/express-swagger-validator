@@ -15,10 +15,9 @@ describe('ApiRouter', () => {
     app.use(express.urlencoded({ extended: true }));
 
     const router = validationRouter();
-    router.get('/test', callback);
-    router.get('/test2', callback);
+    router.get('/', callback);
     router.post(
-      '/test2',
+      '/',
       {
         // @ts-ignore
         summary: '테스트용',
@@ -28,10 +27,16 @@ describe('ApiRouter', () => {
     );
     router.put('/:id', callback);
 
-    app.use('/api/v1', router);
+    app.use('/api/v1/tests', router);
 
     const swagger = new SwaggerGenerator({ info: { title: 'test', version: '1.0.0' } });
 
+    expect(Object.keys(swagger.openApiJSON.paths).length).toBe(0);
+
     swagger.generatorOpenApiJSON(app);
+
+    expect(swagger.openApiJSON.paths['/api/v1/tests'].get).not.toBeNull();
+    expect(swagger.openApiJSON.paths['/api/v1/tests'].post.parameters.length).toBe(1);
+    expect(swagger.openApiJSON.paths['/api/v1/tests/{id}'].put).not.toBeNull();
   });
 });
