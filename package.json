@@ -1,6 +1,6 @@
 {
   "name": "express-swagger-validator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "express openapi3 generator with validator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,7 +13,7 @@
   "author": "begin0dev",
   "repository": {
     "type": "git",
-    "url": "https://github.com/begin0dev/express-oas-validator"
+    "url": "https://github.com/begin0dev/express-swagger-validator"
   },
   "license": "MIT",
   "dependencies": {
@@ -46,5 +46,12 @@
     "supertest": "^6.1.3",
     "ts-jest": "^26.5.3",
     "typescript": "^4.2.3"
+  },
+  "bugs": {
+    "url": "https://github.com/begin0dev/express-oas-validator/issues"
+  },
+  "homepage": "https://github.com/begin0dev/express-oas-validator#readme",
+  "directories": {
+    "lib": "lib"
   }
 }
