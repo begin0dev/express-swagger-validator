@@ -8,7 +8,6 @@ import { getEndPoints } from './end-points';
 import { TParametersKey, TDocSchema } from './types';
 
 interface ISwaggerOptions {
-  app: Express,
   info: OpenApi.InfoObject;
   servers?: OpenApi.ServerObject[];
   security?: OpenApi.SecurityRequirementObject[];
@@ -18,12 +17,11 @@ export class SwaggerGenerator {
   private readonly app: Express;
   openApiJSON: OpenApi.OpenAPIObject;
 
-  constructor({ app, info, servers }: ISwaggerOptions) {
+  constructor(app: Express, options: ISwaggerOptions) {
     this.app = app;
     this.openApiJSON = {
+      ...options,
       openapi: '3.0.1',
-      info,
-      servers,
       tags: [],
       paths: {},
     };
@@ -51,7 +49,10 @@ export class SwaggerGenerator {
             acc.concat(
               Object.entries(requestKeySchema.properties).map(
                 // TODO: any 고치고 싶다
-                ([name, { description: schemaDesc, kind, ...schema }]: [string, any]): OpenApi.ParameterObject => ({
+                ([name, { description: schemaDesc, kind, ...schema }]: [
+                  string,
+                  any,
+                ]): OpenApi.ParameterObject => ({
                   name,
                   schema,
                   in: requestKeyMap[requestKey],

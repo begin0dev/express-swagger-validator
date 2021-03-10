@@ -129,7 +129,7 @@ import { SwaggerGenerator } from 'express-swagger-validator';
 
 const app = express();
 
-const swagger = new SwaggerGenerator({ app, info: { title: 'api test', version: '1.0.0' } });
+const swagger = new SwaggerGenerator(app, { info: { title: 'api test', version: '1.0.0' } });
 
 swagger.setSwaggerUi('/api-doc', {
   /* swagger ui options */

@@ -1,6 +1,6 @@
 {
   "name": "express-swagger-validator",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "express openapi3 generator with validator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

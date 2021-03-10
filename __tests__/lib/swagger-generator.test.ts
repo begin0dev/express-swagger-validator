@@ -28,7 +28,7 @@ describe('ApiRouter', () => {
 
     app.use('/api/v1/tests', router);
 
-    const swagger = new SwaggerGenerator({ app, info: { title: 'test', version: '1.0.0' } });
+    const swagger = new SwaggerGenerator(app, { info: { title: 'test', version: '1.0.0' } });
 
     expect(Object.keys(swagger.openApiJSON.paths).length).toBe(0);
 
