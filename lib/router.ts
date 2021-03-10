@@ -1,4 +1,4 @@
-import { Router, Request, Response, NextFunction } from 'express';
+import { Router, Request, Response, NextFunction, RequestParamHandler } from 'express';
 
 import { requestValidator } from './validator';
 
@@ -13,7 +13,7 @@ function copyFnProps(oldFn: any, newFn: any) {
   return newFn;
 }
 
-function wrap(fn: any) {
+function wrap(fn: RequestParamHandler) {
   const newFn = (...args: any[]) => {
     const middleware = fn.apply(this, args);
     if (middleware?.catch) {
@@ -43,7 +43,7 @@ Object.defineProperty(Layer.prototype, 'handle', {
 });
 
 const originalParam = Router.prototype.constructor.param;
-Router.prototype.constructor.param = function param(name: string, fn: any) {
+Router.prototype.constructor.param = function param(name: string, fn: RequestParamHandler) {
   return originalParam.call(this, name, wrap(fn));
 };
 
