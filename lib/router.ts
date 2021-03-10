@@ -1,7 +1,7 @@
-import { Router, Request, Response, NextFunction, RequestParamHandler } from 'express';
+import { Router, Request, Response, NextFunction, RequestParamHandler, RouterOptions } from 'express';
 
 import { requestValidator } from './validator';
-import { TMethod } from './types';
+import { TMethod, IValidatorRouter } from './types';
 
 const Layer = require('express/lib/router/layer');
 const Route = require('express/lib/router/route');
@@ -65,4 +65,4 @@ Router.prototype.constructor.param = function param(name: string, fn: RequestPar
   };
 });
 
-export default Router;
+export default Router as (options?: RouterOptions) => IValidatorRouter;

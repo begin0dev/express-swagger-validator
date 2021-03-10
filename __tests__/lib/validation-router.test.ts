@@ -23,7 +23,6 @@ describe('ApiRouter', () => {
     router.post(
       '/test',
       {
-        // @ts-ignore
         summary: '테스트용',
         body: Type.Object({ email: Type.String({ format: 'email', description: '테스트용 아이디' }) }),
       },
