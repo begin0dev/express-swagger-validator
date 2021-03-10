@@ -8,15 +8,18 @@ import { getEndPoints } from './end-points';
 import { ParametersKey, DocSchema } from './types';
 
 interface ISwaggerOptions {
+  app: Express,
   info: OpenApi.InfoObject;
   servers?: OpenApi.ServerObject[];
   security?: OpenApi.SecurityRequirementObject[];
 }
 
-class SwaggerGenerator {
+export class SwaggerGenerator {
+  private app: Express;
   openApiJSON: OpenApi.OpenAPIObject;
 
-  constructor({ info, servers }: ISwaggerOptions) {
+  constructor({ app, info, servers }: ISwaggerOptions) {
+    this.app = app;
     this.openApiJSON = {
       openapi: '3.0.1',
       info,
@@ -26,8 +29,8 @@ class SwaggerGenerator {
     };
   }
 
-  generatorOpenApiJSON = (app: Express) => {
-    const endPoints = getEndPoints(app);
+  generatorOpenApiJSON = () => {
+    const endPoints = getEndPoints(this.app);
 
     endPoints.forEach((endPoint) => {
       const routePath = routePathToSwaggerPath(endPoint.path);
@@ -83,10 +86,8 @@ class SwaggerGenerator {
     });
   };
 
-  setSwaggerUi = (path: string, app: Express, options?: SwaggerOptions) => {
-    this.generatorOpenApiJSON(app);
-    app.use(path, swaggerUi.serve, swaggerUi.setup(this.openApiJSON, options));
+  setSwaggerUi = (path: string, options?: SwaggerOptions) => {
+    this.generatorOpenApiJSON();
+    this.app.use(path, swaggerUi.serve, swaggerUi.setup(this.openApiJSON, options));
   };
 }
-
-export default SwaggerGenerator;

@@ -2,8 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import { agent } from 'supertest';
 import { Type } from '@serverless-seoul/typebox';
 
-import validationRouter from '../../lib/validation-router';
-import { ValidationError } from '../../lib/validator';
+import { Router, ValidationError } from '../../lib';
 
 describe('ApiRouter', () => {
   const message = 'async error test';
@@ -20,7 +19,7 @@ describe('ApiRouter', () => {
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
-    const router = validationRouter();
+    const router = Router();
     router.post(
       '/test',
       {
