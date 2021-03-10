@@ -5,7 +5,7 @@ import { setWith } from 'lodash';
 
 import { routePathToSwaggerPath, requestKeyMap } from './helper';
 import { getEndPoints } from './end-points';
-import { ParametersKey, DocSchema } from './types';
+import { TParametersKey, TDocSchema } from './types';
 
 interface ISwaggerOptions {
   app: Express,
@@ -15,7 +15,7 @@ interface ISwaggerOptions {
 }
 
 export class SwaggerGenerator {
-  private app: Express;
+  private readonly app: Express;
   openApiJSON: OpenApi.OpenAPIObject;
 
   constructor({ app, info, servers }: ISwaggerOptions) {
@@ -46,7 +46,7 @@ export class SwaggerGenerator {
         pathsObject.parameters = Object.entries(parameters).reduce(
           (
             acc: OpenApi.ParameterObject[],
-            [requestKey, requestKeySchema]: [ParametersKey, DocSchema<any>[ParametersKey]],
+            [requestKey, requestKeySchema]: [TParametersKey, TDocSchema<any>[TParametersKey]],
           ) =>
             acc.concat(
               Object.entries(requestKeySchema.properties).map(

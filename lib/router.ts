@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction, RequestParamHandler } from 'express';
 
 import { requestValidator } from './validator';
+import { TMethod } from './types';
 
 const Layer = require('express/lib/router/layer');
 const Route = require('express/lib/router/route');
@@ -48,8 +49,7 @@ Router.prototype.constructor.param = function param(name: string, fn: RequestPar
 };
 
 // override Route[method] function
-type methodType = 'all' | 'get' | 'post' | 'put' | 'delete' | 'patch';
-['all', 'get', 'post', 'put', 'delete', 'patch'].forEach((method: methodType) => {
+['all', 'get', 'post', 'put', 'delete', 'patch'].forEach((method: TMethod) => {
   const original = Route.prototype[method];
   Route.prototype[method] = function (...args: any[]) {
     const [schema] = args;

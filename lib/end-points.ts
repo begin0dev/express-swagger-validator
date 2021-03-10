@@ -1,6 +1,6 @@
 import { Express } from 'express';
 
-import { EndPoint } from './types';
+import { TEndPoint, TMethod, TDocSchema } from './types';
 
 const regexpExpressRegexp = /^\/\^\\\/(?:(:?[\w\\.-]*(?:\\\/:?[\w\\.-]*)*)|(\(\?:\(\[\^\\\/]\+\?\)\)))\\\/.*/;
 const regexpExpressParam = /\(\?:\(\[\^\\\/]\+\?\)\)/g;
@@ -10,12 +10,12 @@ const STACK_ITEM_VALID_NAMES = ['router', 'bound dispatch'];
 const getRouteMethods = (route: any) =>
   Object.keys(route.methods)
     .filter((method: string) => method !== '_all')
-    .map((method: string) => method.toLowerCase());
+    .map((method: string) => method.toLowerCase()) as TMethod[];
 
-const parseExpressRoute = (route: any, basePath?: string) => ({
+const parseExpressRoute = (route: any, basePath?: string): TEndPoint => ({
   path: `${basePath}${basePath && route.path === '/' ? '' : route.path}`,
   methods: getRouteMethods(route),
-  schema: route.schema,
+  schema: route.schema as TDocSchema<any>,
 });
 
 const parseExpressPath = (expressPathRegexp: string, params: any) => {
@@ -34,7 +34,7 @@ const parseExpressPath = (expressPathRegexp: string, params: any) => {
   return parsedPath[1].replace(/\\\//g, '/');
 };
 
-export const getEndPoints = (exp: Express, basePath?: string, endpoints?: EndPoint[]): EndPoint[] => {
+export const getEndPoints = (exp: Express, basePath?: string, endpoints?: TEndPoint[]): TEndPoint[] => {
   // eslint-disable-next-line no-param-reassign
   endpoints = endpoints || [];
   const newBasePath = basePath || '';
