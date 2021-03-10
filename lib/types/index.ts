@@ -71,5 +71,4 @@ export interface IValidatorRouter extends IRouter {
   put: IValidatorRouterMatcher<this, 'put'>;
   delete: IValidatorRouterMatcher<this, 'delete'>;
   patch: IValidatorRouterMatcher<this, 'patch'>;
-  head: IValidatorRouterMatcher<this, 'head'>;
 }

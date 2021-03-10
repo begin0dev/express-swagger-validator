@@ -19,7 +19,6 @@ describe('ApiRouter', () => {
     router.post(
       '/',
       {
-        // @ts-ignore
         summary: '테스트용',
         params: Type.Object({ id: Type.String({ description: '테스트용 아이디' }) }),
       },
