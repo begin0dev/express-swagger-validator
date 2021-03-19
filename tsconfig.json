@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "esModuleInterop": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "outDir": "dist",
     "resolveJsonModule": true,
-    "target": "es2018",
+    "target": "es2019",
     "typeRoots": ["node_modules/@types", "lib/types"]
   },
   "include": ["lib/**/*.ts"]

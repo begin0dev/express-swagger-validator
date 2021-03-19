@@ -1,6 +1,7 @@
 import * as OpenApi from 'openapi3-ts';
 import { Express } from 'express';
-import swaggerUi, { SwaggerOptions } from 'swagger-ui-express';
+import * as swaggerUi from 'swagger-ui-express';
+import { SwaggerOptions } from 'swagger-ui-express';
 import { setWith } from 'lodash';
 
 import { routePathToSwaggerPath, requestKeyMap } from './helper';

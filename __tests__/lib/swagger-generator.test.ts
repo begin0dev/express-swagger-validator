@@ -1,4 +1,5 @@
-import express, { Request, Response } from 'express';
+import * as express from 'express';
+import { Request, Response } from 'express';
 import { Type } from '@serverless-seoul/typebox';
 
 import { Router, SwaggerGenerator } from '../../lib';
