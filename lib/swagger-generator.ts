@@ -1,8 +1,8 @@
 import * as OpenApi from 'openapi3-ts';
-import { Express } from 'express';
 import * as swaggerUi from 'swagger-ui-express';
-import { SwaggerOptions } from 'swagger-ui-express';
+import { Express } from 'express';
 import { setWith } from 'lodash';
+import { SwaggerOptions } from 'swagger-ui-express';
 
 import { routePathToSwaggerPath, requestKeyMap } from './helper';
 import { getEndPoints } from './end-points';
@@ -15,11 +15,9 @@ interface ISwaggerOptions {
 }
 
 export class SwaggerGenerator {
-  private readonly app: Express;
   openApiJSON: OpenApi.OpenAPIObject;
 
-  constructor(app: Express, options: ISwaggerOptions) {
-    this.app = app;
+  constructor(private readonly app: Express, options: ISwaggerOptions) {
     this.openApiJSON = {
       ...options,
       openapi: '3.0.1',

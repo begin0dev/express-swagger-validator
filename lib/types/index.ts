@@ -47,7 +47,6 @@ export interface IValidatorRouterMatcher<
   >(
     path: PathParams,
     docSchema?: TDocSchema<any>,
-    // tslint:disable-next-line no-unnecessary-generics (This generic is meant to be passed explicitly.)
     ...handlers: Array<RequestHandler<P, ResBody, ReqBody, ReqQuery, Locals>>
   ): T;
   <
@@ -58,7 +57,6 @@ export interface IValidatorRouterMatcher<
     Locals extends Record<string, any> = Record<string, any>
   >(
     path: PathParams,
-    // tslint:disable-next-line no-unnecessary-generics (This generic is meant to be passed explicitly.)
     ...handlers: Array<RequestHandlerParams<P, ResBody, ReqBody, ReqQuery, Locals>>
   ): T;
   (path: PathParams, subApplication: Application): T;
